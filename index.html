@@ -1,41 +1,356 @@
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Bakery",
-  "name": "Art & Cafe",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "4699 Rosebud Rd",
-    "addressLocality": "Loganville",
-    "addressRegion": "GA",
-    "postalCode": "30052",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "33.8247", 
-    "longitude": "-83.9674"
-  },
-  "telephone": "+1-706-312-2311",
-  "priceRange": "$$",
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Sunday"
-      ],
-      "opens": "09:30",
-      "closes": "18:30"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Saturday",
-      "opens": "09:30",
-      "closes": "19:00"
-    }
-  ]
-}
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arts & Café | Cozy Local Cafe in Loganville, GA</title>
+    <style>
+        :root {
+            --primary: #6F4E37; /* Warm Coffee Brown */
+            --secondary: #EEDC82; /* Warm Soft Gold */
+            --accent: #A3C1AD; /* Matcha / Boba Sage Green */
+            --text-dark: #2C2C2C;
+            --text-light: #FDFBF7;
+            --bg-cream: #FAF6F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 44, 44, 0.4), rgba(44, 44, 44, 0.6)), 
+                        url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=1200') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #563b29;
+            transform: translateY(-2px);
+        }
+
+        /* Section Global Layout */
+        .section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto 0 auto;
+        }
+
+        /* Highlights / Menu Preview */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Reviews / Testimonials */
+        .reviews-section {
+            background-color: #f2eae1;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .stars {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .reviewer {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Info / Contact Block */
+        .info-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .info-block h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .info-list span.icon {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-container { flex-direction: column; gap: 15px; }
+            .info-wrapper { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">☕ Arts & Café</a>
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#visit">Find Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Arts & Café</h1>
+        <p>A hidden local gem serving up fresh specialty coffee, custom boba teas, and homemade artisan pastries in a cozy, warm atmosphere.</p>
+        <a href="#visit" class="btn">Come On In</a>
+    </section>
+
+    <!-- Menu Quick Preview -->
+    <section id="menu" class="section">
+        <h2 class="section-title">What We Spark Up</h2>
+        <div class="grid-4">
+            <div class="card">
+                <div class="card-icon">☕</div>
+                <h3>Specialty Coffee</h3>
+                <p>Exceptional cappuccinos, smooth lattes, and classic hot or cold brews made with love.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧋</div>
+                <h3>Signature Boba</h3>
+                <p>Perfectly brewed milk teas and refreshing fruit variations with fresh boba pearls.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🥐</div>
+                <h3>Artisan Pastries</h3>
+                <p>Famous lemon blueberry bread, fresh red velvet muffins, and an assortment of macarons.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🍵</div>
+                <h3>Matcha & Teas</h3>
+                <p>Vibrant green matcha lattes and an intentionally curated list of hot loose-leaf teas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section">
+        <section id="reviews" class="section">
+            <h2 class="section-title">Loved by the Community</h2>
+            <div class="grid-3">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Coffee was SOOO good and owner is so SOOO SWEEET🫶🏽 everyone go here asap"</p>
+                    <p class="reviewer">— Local Guest</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Such a cozy cafe to pop into for a coffee, boba, tea, and treat! I snagged a cappuccino and a few pastries to sample... Everything was delicious."</p>
+                    <p class="reviewer">— Sean & Kendra James</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Local gem. Owner is so nice. Welcome atmosphere. Nice bakery items and great hot & cold beverages. Will visit again."</p>
+                    <p class="reviewer">— Piyush Kayastha</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Location & Contact Section -->
+    <section id="visit" class="section">
+        <h2 class="section-title">Plan Your Visit</h2>
+        <div class="info-wrapper">
+            <div class="info-block">
+                <h3>Hours & Pricing</h3>
+                <ul class="info-list">
+                    <li><span class="icon">🕒</span> Open daily until 7:30 PM</li>
+                    <li><span class="icon">💵</span> $10–20 per person (Affordable & High Quality)</li>
+                </ul>
+            </div>
+            <div class="info-block">
+                <h3>Contact & Location</h3>
+                <ul class="info-list">
+                    <li><span class="icon">📍</span> 4699 Rosebud Rd, Loganville, GA 30052</li>
+                    <li><span class="icon">📞</span> (706) 312-2311</li>
+                    <li><span class="icon">🌐</span> Plus Code: Q2XM+94 Loganville, Georgia</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Arts & Café. All rights reserved. Locally owned & operated hospitality.</p>
+    </footer>
+
+</body>
+</html>
